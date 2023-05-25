@@ -28,7 +28,7 @@ else
 fi
 
 # Sub-account creation
-SUB_ACCOUNT=myriad.$ACCOUNT_ID
+SUB_ACCOUNT=myriadsocial.$ACCOUNT_ID
 near create-account $SUB_ACCOUNT --masterAccount $ACCOUNT_ID --initialBalance 10
 
 # Build the fungible token contract
@@ -49,6 +49,16 @@ near call $SUB_ACCOUNT new '{"owner_id": "'$SUB_ACCOUNT'", "total_supply": "'$TO
 
 echo "Fungible Token '$TOKEN_NAME' has been deployed and initialized by sub-account '$SUB_ACCOUNT'"
 echo "Sub-account '$SUB_ACCOUNT' has been created under '$ACCOUNT_ID'"
+
+# Assume 10 tokens are to be sent
+TOKENS_TO_SEND=10
+RECIPIENT_ID="decentricity.testnet"
+
+# Transfer tokens from the main account to the recipient
+near call $SUB_ACCOUNT_ID ft_transfer '{"receiver_id": "'$RECIPIENT_ID'", "amount": "'$TOKENS_TO_SEND'"}' --accountId $NEAR_ACCOUNT_ID --amount 0.000000000000000000000001
+
+echo "Sent $TOKENS_TO_SEND tokens to $RECIPIENT_ID from $SUB_ACCOUNT_ID"
+
 
 # Move back to original directory
 cd ..
