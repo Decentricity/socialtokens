@@ -59,18 +59,6 @@ echo "Fungible Token '$TOKEN_NAME' has been deployed and initialized by sub-acco
 echo "Sub-account '$SUB_ACCOUNT' has been created under '$ACCOUNT_ID'"
 sleep 0.25
 
-echo "Preparing to send tokens..."
-sleep 0.25
-TOKENS_TO_SEND=10
-RECIPIENT_ID="decentricity.testnet"
-
-echo "Transferring tokens from the sub-account to the recipient..."
-sleep 0.25
-near call $SUB_ACCOUNT ft_transfer '{"receiver_id": "'$RECIPIENT_ID'", "amount": "'$TOKENS_TO_SEND'"}' --accountId $SUB_ACCOUNT --amount 0.000000000000000000000001
-
-echo "Sent $TOKENS_TO_SEND tokens to $RECIPIENT_ID from $SUB_ACCOUNT"
-sleep 0.25
-
 echo "Moving back to original directory..."
 sleep 0.25
 cd ..
