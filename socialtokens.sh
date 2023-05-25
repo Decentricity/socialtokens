@@ -32,7 +32,7 @@ ACCOUNT_ID=$(near whoami | awk '{print $1}')
 
 # Sub-account creation
 SUB_ACCOUNT=myriad.$ACCOUNT_ID
-near create-account $SUB_ACCOUNT --masterAccount $ACCOUNT_ID --initialBalance 10
+near create-account $SUB_ACCOUNT --masterAccount $ACCOUNT_ID --initialBalance 1
 
 # Build the fungible token contract
 ./scripts/build.sh
