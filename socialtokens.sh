@@ -7,6 +7,13 @@ then
     npm install -g near-cli
 fi
 
+# Get the account from the script parameters
+ACCOUNT_ID=$1
+
+if [ -z "$ACCOUNT_ID" ]; then
+    echo "You must provide your NEAR account as an argument."
+    exit 1
+fi
 
 # Check if FT repo exists
 if [ ! -d "FT" ]; then
@@ -20,12 +27,9 @@ else
     cd FT
 fi
 
-# Get current logged in NEAR account
-ACCOUNT_ID=$(near whoami | awk '{print $1}')
-
 # Sub-account creation
 SUB_ACCOUNT=myriad.$ACCOUNT_ID
-near create-account $SUB_ACCOUNT --masterAccount $ACCOUNT_ID --initialBalance 1
+near create-account $SUB_ACCOUNT --masterAccount $ACCOUNT_ID --initialBalance 10
 
 # Build the fungible token contract
 ./scripts/build.sh
