@@ -7,13 +7,6 @@ then
     npm install -g near-cli
 fi
 
-# Check if user is logged in NEAR CLI
-if ! near state $(near whoami | awk '{print $1}') > /dev/null 2>&1
-then
-    echo "Please login to NEAR CLI first"
-    near login
-    exit 1
-fi
 
 # Check if FT repo exists
 if [ ! -d "FT" ]; then
